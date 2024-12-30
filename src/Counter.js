@@ -27,7 +27,7 @@ export default function Counter() {
     }
 
   return (
-    <div className="Counter">
+    <div className='Counter'>
       <div>
         <button onClick={() => setStep(s => Math.max(s - 1, 1))}>-</button>
         <span>Step: {step}</span>
@@ -38,7 +38,39 @@ export default function Counter() {
         <span>Count: {count}</span>
         <button onClick={() => setCount(count + step)}>+</button>
       </div>
+      <div>
+        <input
+          type='range'
+          min='1'
+          max='10'
+          value={step}
+          step='1'
+          onChange={({ target: { value } }) => setStep(+value)}
+        />
+        <span>{step}</span>
+      </div>
+      <div>
+        <button onClick={() => setCount(count - step)}>-</button>
+        <input
+          type='text'
+          value={count}
+          onChange={({ target: { value } }) => setCount(+value)}
+        />
+        <button onClick={() => setCount(count + step)}>+</button>
+      </div>
       <p>{getMessage(count)}</p>
+      {(step !== 1 || count !== 0) && (
+        <div>
+          <input
+            type='reset'
+            value='reset'
+            onClick={() => {
+              setCount(0)
+              setStep(1)
+            }}
+          />
+        </div>
+      )}
     </div>
   )
 }
